@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Kopiujemy projekt wskazując na podfolder backend/
+COPY ["backend/GRU_APP.Backend.csproj", "./"]
+RUN dotnet restore "./GRU_APP.Backend.csproj"
+
+# Kopiujemy resztę kodu i budujemy aplikację
+COPY backend/ .
+RUN dotnet build "GRU_APP.Backend.csproj" -c Release
+
+# Publikujemy aplikację
+RUN dotnet publish "GRU_APP.Backend.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+COPY --from=build /app/publish .
+EXPOSE 8080
+
+# Wpisujemy dokładną, pełną nazwę pliku wynikowego z Twojego projektu
+ENTRYPOINT ["dotnet", "GRU_APP.Backend.dll"]

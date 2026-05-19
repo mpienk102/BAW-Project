@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1b1f3b;
+  --color-primary-dark: #13172b;
+  --color-secondary: #6d9773;
+  --color-accent: #c96c4a;
+  --color-background: #f7f2ea;
+  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+}
+
+@layer base {
+  :root {
+    --color-ink: #1b1f3b;
+    --color-paper: #ece0cf;
+    --color-muted: #645d57;
+    --color-line: rgba(27, 31, 59, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-background);
+    background-image:
+      radial-gradient(circle at top left, rgba(201, 108, 74, 0.12), transparent 34%),
+      radial-gradient(circle at top right, rgba(109, 151, 115, 0.16), transparent 28%),
+      linear-gradient(180deg, #f7f2ea 0%, #f4ede3 100%);
+    color: #1e293b;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+  }
+
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  }
+}
